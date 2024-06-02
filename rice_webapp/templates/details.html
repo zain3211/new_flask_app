@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Classification Results</h2>
+            <ul id="technique-list">
+                <li><a href="#" data-technique="original">Classification Result - Raw</a></li>
+                <li><a href="#" data-technique="he">Classification Result - HE</a></li>
+                <li><a href="#" data-technique="cs1">Classification Result - CS1</a></li>
+                <li><a href="#" data-technique="cs2">Classification Result - CS2</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <h2 id="technique-label">{{ technique_label }} Accuracy Graph</h2>
+            <img id="processed-image" src="{{ url_for('send_processed_file', filename=processed_images[technique]) }}" alt="{{ technique_label }} Processed Image">
+            <img id="accuracy-graph" src="{{ url_for('get_graph', technique=technique) }}" alt="{{ technique_label }} Accuracy Graph">
+            <div class="try-again">
+                <a href="{{ url_for('index') }}" class="button">Try again</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Sample processed images dictionary for demonstration
+        var processed_images = {
+            'original': '{{ processed_images["original"] }}',
+            'he': '{{ processed_images["he"] }}',
+            'cs1': '{{ processed_images["cs1"] }}',
+            'cs2': '{{ processed_images["cs2"] }}'
+        };
+
+        document.getElementById('technique-list').addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                var technique = e.target.getAttribute('data-technique');
+                var processedImageElement = document.getElementById('processed-image');
+                var graphElement = document.getElementById('accuracy-graph');
+                var techniqueLabel = document.getElementById('technique-label');
+                
+                // Update the technique label
+                var techniqueNames = {
+                    'original': 'Original',
+                    'he': 'Histogram Equalization',
+                    'cs1': 'Contrast Stretching 1',
+                    'cs2': 'Contrast Stretching 2'
+                };
+                techniqueLabel.innerText = techniqueNames[technique] + " Accuracy Graph";
+
+                // Append a timestamp as a query parameter to bypass caching
+                var timestamp = new Date().getTime();
+                var newImageSrc = '/processed/' + processed_images[technique] + '?t=' + timestamp;
+                var newGraphSrc = '/get_graph/' + technique + '?t=' + timestamp;
+
+                // Force reload the processed image
+                processedImageElement.src = newImageSrc;
+
+                // Force reload the graph image
+                graphElement.src = newGraphSrc;
+            }
+        });
+    </script>
+</body>
+</html>

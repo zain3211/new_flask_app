@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>No Disease Detected</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>INFORMATION</h2>
+            <p>Healthy Image</p>
+        </div>
+        <div class="main">
+            <h2>No Disease Detected</h2>
+            <div class="images">
+                <div class="image-container">
+                    <h3>Original Image</h3>
+                    <img src="{{ url_for('send_uploaded_file', filename=original_image) }}" alt="Original Image">
+                </div>
+                <div class="image-container">
+                    <h3>Histogram Equalization</h3>
+                    <img src="{{ url_for('send_processed_file', filename=processed_images.he) }}" alt="Histogram Equalized Image">
+                </div>
+                <div class="image-container">
+                    <h3>Contrast Stretching 1</h3>
+                    <img src="{{ url_for('send_processed_file', filename=processed_images.cs1) }}" alt="Contrast Stretched Image 1">
+                </div>
+                <div class="image-container">
+                    <h3>Contrast Stretching 2</h3>
+                    <img src="{{ url_for('send_processed_file', filename=processed_images.cs2) }}" alt="Contrast Stretched Image 2">
+                </div>
+            </div>
+            <div class="results-container">
+                <div class="accuracies">
+                    <h3>Accuracy</h3>
+                    <p>Original: {{ accuracies['Original'] }}%</p>
+                    <p>HE: {{ accuracies['HE'] }}%</p>
+                    <p>CS1: {{ accuracies['CS1'] }}%</p>
+                    <p>CS2: {{ accuracies['CS2'] }}%</p>
+                </div>
+                <div class="try-again">
+                    <a href="{{ url_for('index') }}" class="button">Try again</a>
+                </div>
+                <div class="view-details">
+                    <select id="technique-select">
+                        <option value="original">Original</option>
+                        <option value="he">HE</option>
+                        <option value="cs1">CS1</option>
+                        <option value="cs2">CS2</option>
+                    </select>
+                    <a id="details-button" href="#" class="button">Show Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('details-button').onclick = function() {
+            var technique = document.getElementById('technique-select').value;
+            var prediction = "healthy";
+            var baseUrl = "{{ url_for('view_details', prediction='_prediction_', technique='_technique_') }}";
+var url = baseUrl.replace('_prediction_', encodeURIComponent(prediction)).replace('_technique_', encodeURIComponent(technique));
+            this.href = url;
+        };
+    </script>
+</body>
+</html>

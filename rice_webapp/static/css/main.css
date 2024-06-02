@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    margin: 50px auto;
+     height: 70vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #dff0d8;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.main {
+    width: 75%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main h1, .main h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+button, .button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+}
+
+button:hover, .button:hover {
+    background-color: #4cae4c;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
+    width: 70%;
+    /* height: 40px; */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100px; 
+    object-fit: cover;
+}
+
+.image-container h3 {
+    margin: 10px 0;
+}
+
+.results-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.accuracies {
+    flex-grow: 1;
+}
+
+.accuracies h3 {
+    margin-top: 0;
+}
+
+.try-again {
+    margin-left: 20px;
+}
+.accuracies p {
+    display: inline;
+    margin-right: 20px;
+}
+/* Add this at the end of your existing CSS */
+
+.view-details {
+    margin-left: 20px;
+}
+
+.view-details .button {
+    background-color: #0275d8;
+}
+
+.view-details .button:hover {
+    background-color: #025aa5;
+}
+#accuracy-graph {
+    /* transform: rotate(90deg); */
+    width: 700px; /* Set the width of the graph */
+    height: auto; /* Rotate the image 90 degrees clockwise */
+}
+

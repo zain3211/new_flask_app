@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rice Disease Classifier</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>WELCOME</h2>
+            <p>Article:</p>
+            <p> We employ advanced pre-processing techniques like Histogram Equalization and Contrast Stretching to enhance image quality and highlight potential disease signatures. This multi-step analysis empowers our models to achieve a more accurate diagnosis of various rice diseases</p>
+            <p><a href="{{ url_for('static', filename='main.pdf') }}" target="_blank">If clicked, it will lead to a PDF file.</a></p>
+        </div>
+        <div class="main">
+            <h1>Rice Disease Diagnosis with Multiple Pre-processing Techniques</h1>
+            <div id="drop_zone" style="width: 500px; height:250px; border: 1px solid black; display: flex; align-items: center; justify-content: center; text-align: center;">
+                Drop an image here or click to select
+            </div>
+            <form id="upload_form" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" accept="image/jpeg, image/png" required style="display: none;">
+                <button type="submit">Upload and Classify</button>
+            </form>
+        </div>
+    </div>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
